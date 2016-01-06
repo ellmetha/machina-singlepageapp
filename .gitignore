@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+*.db
+*.log
+
+__pycache__
+
+.cache/
+build/
+bundles/
+node_modules/
+public/
+whoosh_index/
+
+webpack-stats-dev.json

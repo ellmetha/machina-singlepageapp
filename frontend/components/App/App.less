@@ -1,0 +1,45 @@
+@import "~bootstrap/less/bootstrap";
+@import "~font-awesome/less/font-awesome";
+
+@import "../variables";
+
+body{
+  background: @gray-lighter;
+}
+
+form{
+  label{
+    font-family: @opensanssemibold;
+    font-weight: normal;
+    color: @gray-dark;
+  }
+
+  input.form-control{
+    padding: 12px;
+    height: 46px;
+    border-radius: 0 !important;
+    font-family: @opensanssemibold;
+
+    &:focus{
+      border-color: @gray-light !important;
+      .box-shadow(0 0 2px @blue-lighter) !important;
+    }
+  }
+}
+
+.btn{
+  padding: 12px;
+  font-family: @opensanssemibold;
+  .transition(all .25s ease-in-out);
+
+  &.btn-primary{
+    background: @blue;
+    border-radius: 0;
+    color: @blue-lighter;
+
+    &:hover, &:focus{
+      background: darken(@blue, 5%);
+      border-color: @blue;
+    }
+  }
+}

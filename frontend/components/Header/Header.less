@@ -1,0 +1,61 @@
+@import "~bootstrap/less/mixins";
+
+@import "../variables";
+
+.navbar{
+  min-height: 50px !important;
+  background: @blue-darker !important;
+  border: @blue-darker !important;
+  border-radius: 0 !important;
+
+  a.navbar-brand{
+    font-family: @dancingscriptbold;
+    font-size: 24px;
+    color: @white;
+    .transition(color .25s ease-in-out);
+
+    &:hover, &:focus{
+      color: @blue-lighter;
+    }
+  }
+
+  p.navbar-text{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    float: none;
+    font-family: @opensanssemibold;
+    color: @white;
+  }
+
+  ul.nav{
+    li{
+      a{
+        font-family: @opensanssemibold;
+        color: @white;
+        .transition(all .25s ease-in-out);
+
+        &:hover, &:focus{
+          background: @blue-dark;
+          color: @blue-lighter;
+        }
+      }
+    }
+  }
+
+  .navbar-collapse{
+    text-align: center;
+  }
+}
+
+.nav-tooltip{
+  .tooltip-inner{
+      background: @blue-dark !important;
+      border-radius: 0 !important;
+      font-family: @opensanssemibold;
+      color: @white;
+  }
+  .tooltip-arrow{
+      border-bottom-color: @blue-dark !important;
+  }
+}

@@ -1,0 +1,23 @@
+@import "~bootstrap/less/mixins";
+
+@import "../variables";
+
+.signin-box{
+  margin: 10% auto;
+  padding: 20px;
+  width: 350px;
+  background: @white;
+  border-bottom: 2px solid darken(@gray-lighter, 4%);
+
+  form{
+    legend{
+      font-family: @opensanssemibold;
+      text-align: center;
+      color: @blue-dark;
+    }
+
+    .buttons-wrapper{
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "ForumTree",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ForumTree.js"
+}
