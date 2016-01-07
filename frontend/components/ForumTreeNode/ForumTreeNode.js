@@ -16,7 +16,7 @@ class ForumTreeNode extends React.Component {
   render() {
     const { forum } = this.props;
     return (
-      <div>
+      <div className="forum-node">
         {forum.relativeLevel == 0 &&
           <div>
             {forum.type == 1 &&
@@ -57,72 +57,69 @@ class ForumTreeNode extends React.Component {
                   </Row>
                 </div>
                 <div className="panel-body">
-                  {forum.type == 0 &&
-                    <div>
-                      <Col md={8} sm={9} xs={11} className="forum-name">
-                        <table className="forum-data-table">
-                          <tbody>
-                            <tr>
-                              <td className="forum-icon">
-                                <i className="fa fa-circle-o fa-2x"></i>
-                              </td>
-                              <td>
-                                <Link to="#" className="forum-name-link">{ forum.name }</Link>
-                                <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
-                                <div className="sub-forums">
-                                  {forum.children.length > 0 &&
-                                    <div>
-                                      <b>Subforums:</b>
-                                      {forum.children
-                                        .map(
-                                          childForum => {
-                                            return (
-                                              <ForumTreeNode key={childForum.id} forum={childForum} />
-                                            );
-                                          }
-                                        )
-                                      }
-                                    </div>
-                                  }
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </Col>
-                      <Col md={1} className="forum-count hidden-sm hidden-xs">{ forum.topics_count }</Col>
-                      <Col md={1} className="forum-count hidden-sm hidden-xs">{ forum.posts_count }</Col>
-                      <Col md={2} sm={3} className="hidden-xs forum-last-post">
-                        TODO
-                      </Col>
-                    </div>
-                  }
-                  {forum.type == 2 &&
-                    <div>
-                      <Col md={8} sm={9} xs={11}>
-                        <table className="forum-data-table">
-                          <tbody>
-                            <tr>
-                              <td className="forum-icon link">
-                                <i className="fa fa-link fa-2x"></i>
-                              </td>
-                              <td>
-                                <Link to="#" className="forum-name-link">{forum.name}</Link>
-                                <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </Col>
-                      <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
-                      <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
-                      <Col mf={2} sm={3} className="hidden-xs forum-link-redirects">
-                        {forum.link_redirects &&
-                          <span>Total redirect: {forum.link_redirects_count}</span>
-                        }
-                      </Col>
-                    </div>
-                  }
+                  <Row className="panel-row">
+                    {forum.type == 0 &&
+                      <div>
+                        <Col md={8} sm={9} xs={11} className="forum-name">
+                          <table className="forum-data-table">
+                            <tbody>
+                              <tr>
+                                <td className="forum-icon">
+                                  <i className="fa fa-tasks fa-2x"></i>
+                                </td>
+                                <td>
+                                  <Link to="#" className="forum-name-link">{ forum.name }</Link>
+                                  <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
+                                  <div className="sub-forums">
+                                    {forum.children.length > 0 &&
+                                      <div>
+                                        <b>Subforums:</b>
+                                        {forum.children
+                                          .map(
+                                            childForum => {
+                                              return (
+                                                <ForumTreeNode key={childForum.id} forum={childForum} />
+                                              );
+                                            }
+                                          )
+                                        }
+                                      </div>
+                                    }
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </Col>
+                        <Col md={1} className="forum-count hidden-sm hidden-xs">{ forum.topics_count }</Col>
+                        <Col md={1} className="forum-count hidden-sm hidden-xs">{ forum.posts_count }</Col>
+                        <Col md={2} sm={3} className="hidden-xs forum-last-post">
+                          TODO
+                        </Col>
+                      </div>
+                    }
+                    {forum.type == 2 &&
+                      <div>
+                        <Col md={8} sm={9} xs={11}>
+                          <table className="forum-data-table">
+                            <tbody>
+                              <tr>
+                                <td className="forum-icon link">
+                                  <i className="fa fa-external-link-square fa-2x"></i>
+                                </td>
+                                <td>
+                                  <a href={forum.link} className="forum-name-link">{forum.name}</a>
+                                  <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </Col>
+                        <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
+                        <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
+                      </div>
+                    }
+                  </Row>
                 </div>
               </div>
             }
@@ -139,7 +136,7 @@ class ForumTreeNode extends React.Component {
                         <tbody>
                           <tr>
                             <td className="forum-icon">
-                              <i className="fa fa-circle-o fa-2x"></i>
+                              <i className="fa fa-tasks fa-2x"></i>
                             </td>
                             <td>
                               <Link to="#" className="forum-name-link">{ forum.name }</Link>
@@ -179,10 +176,10 @@ class ForumTreeNode extends React.Component {
                         <tbody>
                           <tr>
                             <td className="forum-icon link">
-                              <i className="fa fa-link fa-2x"></i>
+                              <i className="fa fa-external-link-square fa-2x"></i>
                             </td>
                             <td>
-                              <Link to="#" className="forum-name-link">{forum.name}</Link>
+                              <a href={forum.link} className="forum-name-link">{forum.name}</a>
                               <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
                             </td>
                           </tr>
@@ -191,11 +188,6 @@ class ForumTreeNode extends React.Component {
                     </Col>
                     <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
                     <Col md={1} className="forum-count hidden-sm hidden-xs"></Col>
-                    <Col mf={2} sm={3} className="hidden-xs forum-link-redirects">
-                      {forum.link_redirects &&
-                        <span>Total redirect: {forum.link_redirects_count}</span>
-                      }
-                    </Col>
                   </div>
                 }
               </Row>
