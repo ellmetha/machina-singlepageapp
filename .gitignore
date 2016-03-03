@@ -9,7 +9,11 @@ __pycache__
 build/
 bundles/
 node_modules/
-public/
 whoosh_index/
+
+public/media/*
+!public/media/.gitkeep
+public/static/*
+!public/static/.gitkeep
 
 webpack-stats-dev.json
