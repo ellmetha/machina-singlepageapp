@@ -2,12 +2,12 @@
 
 from __future__ import unicode_literals
 import datetime
+import pathlib
 
 from machina import get_apps as get_machina_apps
 from machina import MACHINA_MAIN_STATIC_DIR
-from unipath import Path
 
-PROJECT_PATH = Path(__file__).ancestor(3)
+PROJECT_PATH = pathlib.Path(__file__).parents[2]
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -33,12 +33,12 @@ LANGUAGES = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_PATH.child('machina-singlepageapp.db'),
+        'NAME': str(PROJECT_PATH / 'machina-singlepageapp.db'),
     }
 }
 
 LOCALE_PATHS = (
-    PROJECT_PATH.child('src', 'locale', 'machina_spa'),
+    str(PROJECT_PATH / 'project' / 'locale'),
 )
 
 # If you set this to False, Django will make some optimizations so as not
@@ -57,7 +57,7 @@ ADMIN_URL = 'admin/'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = PROJECT_PATH.child('public', 'media')
+MEDIA_ROOT = str(PROJECT_PATH / 'public' / 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -68,7 +68,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = PROJECT_PATH.child('public', 'static')
+STATIC_ROOT = str(PROJECT_PATH / 'public' / 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -166,7 +166,7 @@ MIGRATION_MODULES = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': PROJECT_PATH.child('whoosh_index'),
+        'PATH': str(PROJECT_PATH / 'whoosh_index'),
     },
 }
 
