@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { pushPath } from 'redux-simple-router'
+import { push } from 'react-router-redux';
 
 import config from '../config';
 import ActionTypes from '../constants/ActionTypes';
@@ -28,7 +28,7 @@ export function signin(username, password) {
 
       saveAuthToken(token);
       dispatch({ type: ActionTypes.SIGNIN_SUCCESS, token, payload });
-      dispatch(pushPath('/'));
+      dispatch(push('/'));
     } catch (err) {
       let error = (err.status === 401)
         ? Error('Incorrect email or password')
@@ -43,6 +43,6 @@ export function signout() {
   return (dispatch, getState) => {
     cookie.unset('token');
     dispatch({ type: ActionTypes.SIGNOUT });
-    dispatch(pushPath('/'));
+    dispatch(push('/'));
   };
 }

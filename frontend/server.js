@@ -7,7 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
-import { RoutingContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router';
 import serialize from 'serialize-javascript';
 
 import assets from './assets.json';
@@ -63,7 +63,7 @@ server.get('*', async (req, res, next) => {
 
         context.body = ReactDOM.renderToString(
           <Provider store={store}>
-            <RoutingContext {...renderProps} />
+            <RouterContext {...renderProps} />
           </Provider>
         );
         context.head = Helmet.rewind();
