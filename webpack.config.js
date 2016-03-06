@@ -115,16 +115,14 @@ const appConfig = merge({}, baseConfig, {
   ],
 });
 
-/*// Enable React Transform in the "watch" mode
+// Enable React Transform in the "watch" mode
 appConfig.module.loaders
   .filter(x => WATCH && x.loader === 'babel-loader')
-  .forEach(x => x.query = {
+  .forEach(x => (x.query = { // eslint-disable-line no-param-reassign
     // Wraps all React components into arbitrary transforms
     // https://github.com/gaearon/babel-plugin-react-transform
-    presets: ['es2015', 'react'],
-    plugins: ['react-transform'],
-    extra: {
-      'react-transform': {
+    plugins: [
+      ['react-transform', {
         transforms: [
           {
             transform: 'react-transform-hmr',
@@ -136,8 +134,9 @@ appConfig.module.loaders
           },
         ],
       },
-    },
-  });*/
+      ],
+    ],
+  }));
 
 //
 // Configuration for the server-side bundle (server.js)
