@@ -15,7 +15,8 @@ class ForumApp(Application):
 
     def get_urls(self):
         return [
-            url(r'^forums/(?:(?P<parent_id>\d+)/)?', self.forum_list_api_view.as_view(), name='forum-list'),
+            url(r'^forums/(?:(?P<parent_id>\d+)/)?',
+                self.forum_list_api_view.as_view(), name='forum-list'),
         ]
 
 
