@@ -11,22 +11,23 @@ import ForumTreeNode from '../ForumTreeNode';
 
 class ForumTree extends React.Component {
   static propTypes = {
+    params: PropTypes.object,
     user: PropTypes.object,
     forums: PropTypes.array,
     fetchForums: PropTypes.func.isRequired
   };
 
-  static fillStore(redux) {
-    return redux.dispatch(fetchForums());
+  static fillStore(redux, nextState) {
+    return redux.dispatch(fetchForums(nextState.params.id));
   }
 
   componentDidMount() {
-    this.props.fetchForums();
+    this.props.fetchForums(this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user !== this.props.user) {
-      this.props.fetchForums();
+    if ((nextProps.user !== this.props.user) || (nextProps.params.id !== this.props.params.id)) {
+      this.props.fetchForums(nextProps.params.id);
     }
   }
 

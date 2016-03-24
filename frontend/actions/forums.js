@@ -4,11 +4,13 @@ import config from '../config';
 import ActionTypes from '../constants/ActionTypes';
 import getJwtHttpHeaders from '../utils/getJwtHttpHeaders';
 
-export function fetchForums() {
+export function fetchForums(parentForumId) {
   return async (dispatch, getState) => {
     try {
       const { auth: { token } } = getState();
-      const forums = (await axios.get(`${config.backendBaseUrl}/forums/`, token ? {
+      let url = `${config.backendBaseUrl}/forums/`;
+      if (parentForumId) url = url + parentForumId + '/';
+      const forums = (await axios.get(url, token ? {
         headers: getJwtHttpHeaders(token) } : {})).data.results;
 
       dispatch({ type: ActionTypes.FETCH_FORUMS_SUCCESS, forums });

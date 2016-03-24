@@ -15,6 +15,7 @@ class ForumTreeNode extends React.Component {
 
   render() {
     const { forum } = this.props;
+    alert(forum.name);
     return (
       <div className="forum-node">
         {forum.relativeLevel == 0 &&
@@ -25,7 +26,7 @@ class ForumTreeNode extends React.Component {
                     <Row className="panel-row">
                       <Col md={8} sm={9} xs={12} className="forum-name-col">
                         <h3 className="panel-title">
-                          <Link to="#" className="brand">{ this.props.forum.name }</Link>
+                          <Link to={`/forum/${this.props.forum.id}`} className="brand">{ forum.name }</Link>
                         </h3>
                       </Col>
                       <Col md={1} className="forum-count-col hidden-sm hidden-xs">Topics</Col>
@@ -68,7 +69,7 @@ class ForumTreeNode extends React.Component {
                                   <i className="fa fa-tasks fa-2x"></i>
                                 </td>
                                 <td>
-                                  <Link to="#" className="forum-name-link">{ forum.name }</Link>
+                                  <Link to={`/forum/${forum.id}`} className="forum-name-link">{ forum.name }</Link>
                                   <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
                                   <div className="sub-forums">
                                     {forum.children.length > 0 &&
@@ -139,7 +140,7 @@ class ForumTreeNode extends React.Component {
                               <i className="fa fa-tasks fa-2x"></i>
                             </td>
                             <td>
-                              <Link to="#" className="forum-name-link">{ forum.name }</Link>
+                              <Link to={`/forum/${forum.id}`} className="forum-name-link">{ forum.name }</Link>
                               <div className="forum-description" dangerouslySetInnerHTML={ { __html: forum.description } } />
                               <div className="sub-forums">
                                 {forum.children.length > 0 &&
@@ -197,7 +198,7 @@ class ForumTreeNode extends React.Component {
         {forum.relativeLevel == 2 &&
           <span>
             <i className="fa fa-file"></i>&nbsp;
-            <Link to="#">{forum.name}</Link>
+            <Link to={`/forum/${forum.id}`}>{forum.name}</Link>
             &nbsp;&nbsp;
           </span>
         }

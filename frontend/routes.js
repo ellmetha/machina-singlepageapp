@@ -8,6 +8,7 @@ import SignIn from './components/SignIn';
 export default (
   <Route component={App}>
     <Route path='/' component={ForumTree} />
+    <Route path='forum/:id' component={ForumTree} />
     <Route path='signin' component={SignIn} />
   </Route>
 );
