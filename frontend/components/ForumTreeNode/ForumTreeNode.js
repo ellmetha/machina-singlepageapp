@@ -15,7 +15,6 @@ class ForumTreeNode extends React.Component {
 
   render() {
     const { forum } = this.props;
-    alert(forum.name);
     return (
       <div className="forum-node">
         {forum.relativeLevel == 0 &&
