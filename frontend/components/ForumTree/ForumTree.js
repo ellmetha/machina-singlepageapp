@@ -37,9 +37,13 @@ class ForumTree extends React.Component {
   getForumTree() {
     let forums = this.props.forums;
     let rootLevel = undefined;
+    let _topNodes = [];
     let topNodes = [];
     let currentPath = [];
 
+    /*
+     * First creates a list of "top nodes" forums using a flat list of forums
+     */
     for (var i = 0; i < forums.length; i++) {
       let forum = forums[i];
       let forumLevel = forum.level;
@@ -63,7 +67,7 @@ class ForumTree extends React.Component {
 
       if (forumLevel == rootLevel) {
         // The forum is one of the top-level nodes
-        topNodes.push(forum);
+        _topNodes.push(forum);
       } else {
         // Update the parent of the current forum
         let parentForum = currentPath[currentPath.length - 1];
@@ -73,6 +77,45 @@ class ForumTree extends React.Component {
 
       // Add the current forum to the end of the current branch
       currentPath.push(forum);
+    }
+
+    /*
+     * Then creates a new list of "top nodes" forums by embedding forums without categories inside
+     * fake categories in order ease the rendering of ForumTreeNode components.
+     */
+    for (var i = 0; i < _topNodes.length; i++) {
+      let forum = _topNodes[i];
+
+      if (forum.type != 1) {
+        // Fetches the latest "top node"
+        let lastTopNode = topNodes.slice(-1)[0];
+
+        // If the latest "top node" is not a fake category, creates a new fake category
+        if (lastTopNode === undefined || lastTopNode.isDummy === undefined) {
+          lastTopNode = {
+            relativeLevel: 0,
+            type: 1,
+            isDummy: true,
+            children: [],
+            id: 'dummy-' + i,
+          };
+          topNodes.push(lastTopNode);
+        }
+
+        // Update the level of the considered forum and the levels of its children nodes
+        forum.relativeLevel = 1;
+        for (var j = 0; j < forum.children.length; j++) {
+          let child = forum.children[j];
+          child.relativeLevel = 2;
+        }
+
+        // Associates the forum to the current fake category
+        forum.parent = lastTopNode;
+        lastTopNode.children.push(forum);
+      } else {
+        // Do nothing special if we are considering a category
+        topNodes.push(forum);
+      }
     }
 
     return topNodes;
