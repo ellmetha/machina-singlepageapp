@@ -49,7 +49,7 @@ class ForumTree extends React.Component {
       let forumLevel = forum.level;
 
       if (rootLevel === undefined) {
-        // Set the root level to the top node level at the furst iteration
+        // Set the root level to the top node level at the first iteration
         rootLevel = forumLevel;
       }
 
