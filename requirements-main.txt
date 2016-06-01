@@ -1,6 +1,6 @@
-Django==1.8.11
+Django==1.9.6
 django-cors-headers==1.1.0
-django-machina==0.1.1
-djangorestframework==3.3.2
-djangorestframework-jwt==1.7.2
+django-machina==0.2.0
+djangorestframework==3.3.3
+djangorestframework-jwt==1.8.0
 Whoosh==2.7.2
