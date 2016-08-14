@@ -12,11 +12,14 @@ class ForumApp(Application):
     name = 'forum'
 
     forum_list_api_view = views.ForumListAPIView
+    forum_retrieve_api_view = views.ForumRetrieveAPIView
 
     def get_urls(self):
         return [
-            url(r'^forums/(?:(?P<parent_id>\d+)/)?',
-                self.forum_list_api_view.as_view(), name='forum-list'),
+            url(r'^forums/display/(?:(?P<parent_id>\d+)/)?',
+                self.forum_list_api_view.as_view(), name='forum_list'),
+            url(r'^forums/(?P<pk>\d+)/',
+                self.forum_retrieve_api_view.as_view(), name='forum_retrieve'),
         ]
 
 

@@ -4,6 +4,9 @@ export default keyMirror({
   FETCH_FORUMS_SUCCESS: null,
   FETCH_FORUMS_FAILURE: null,
 
+  FETCH_FORUM_DETAILS_SUCCESS: null,
+  FETCH_FORUM_DETAILS_FAILURE: null,
+
   SIGNUP: null,
   SIGNUP_SUCCESS: null,
   SIGNUP_FAILURE: null,

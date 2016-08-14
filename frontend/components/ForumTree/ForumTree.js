@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { fetchForums } from '../../actions/forums';
+import { fetchForums, fetchForumDetails } from '../../actions/forums';
 import ForumTreeNode from '../ForumTreeNode';
 
 class ForumTree extends React.Component {
@@ -14,7 +14,9 @@ class ForumTree extends React.Component {
     params: PropTypes.object,
     user: PropTypes.object,
     forums: PropTypes.array,
-    fetchForums: PropTypes.func.isRequired
+    forumDetails: PropTypes.object,
+    fetchForums: PropTypes.func.isRequired,
+    fetchForumDetails: PropTypes.func.isRequired
   };
 
   static fillStore(redux, nextState) {
@@ -23,11 +25,13 @@ class ForumTree extends React.Component {
 
   componentDidMount() {
     this.props.fetchForums(this.props.params.id);
+    this.props.fetchForumDetails(this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
     if ((nextProps.user !== this.props.user) || (nextProps.params.id !== this.props.params.id)) {
       this.props.fetchForums(nextProps.params.id);
+      this.props.fetchForumDetails(nextProps.params.id);
     }
   }
 
@@ -122,9 +126,20 @@ class ForumTree extends React.Component {
   }
 
   render() {
+    const { forumDetails } = this.props;
     const forums = this.getForumTree();
     return (
       <Grid>
+        <Row>
+          <Col md={12}>
+            {forumDetails &&
+              <h1>{forumDetails.name}</h1>
+            }
+            {!forumDetails &&
+              <div><br /><br /></div>
+            }
+          </Col>
+        </Row>
         <Row>
           <Col md={12}>
             {forums.length > 0 &&
@@ -172,7 +187,8 @@ class ForumTree extends React.Component {
 export default connect(
   state => ({
     user: state.auth.user,
-    forums: state.forums.list.map(id => state.forums.items[id])
+    forums: state.forums.list.map(id => state.forums.items[id]),
+    forumDetails: state.forums.details,
   }),
-  {fetchForums}
+  {fetchForums, fetchForumDetails}
 )(ForumTree);

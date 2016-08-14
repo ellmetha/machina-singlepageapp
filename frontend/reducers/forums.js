@@ -3,7 +3,8 @@ import ActionTypes from '../constants/ActionTypes';
 const initialState = {
   error: null,
   list: [],
-  items: {}
+  items: {},
+  details: null
 };
 
 export default (state = initialState, action) => {
@@ -13,9 +14,13 @@ export default (state = initialState, action) => {
       const items = {};
 
       action.forums.forEach(forum => { items[forum.id] = forum; });
-      return { list, items };
+      return { ...state, list, items };
+
+    case ActionTypes.FETCH_FORUM_DETAILS_SUCCESS:
+        return { ...state, details: action.forumDetails };
 
     case ActionTypes.FETCH_FORUMS_FAILURE:
+    case ActionTypes.FETCH_FORUM_DETAILS_FAILURE:
       return {
         ...state,
         error: action.error
