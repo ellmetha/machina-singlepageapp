@@ -9,6 +9,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django_markdown import urls as django_markdown_urls
 from machina.app import board
+from rest_framework_jwt import views as jwt_views
 
 
 # Admin autodiscover
@@ -21,7 +22,7 @@ urlpatterns = [
     url('^markdown/', include(django_markdown_urls)),
 
     # JWT authentication
-    url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token', name='jwt-signin'),
+    url(r'^api-token-auth/', jwt_views.obtain_jwt_token, name='jwt-signin'),
 
     # Forum board
     url(r'', include(board.urls)),
